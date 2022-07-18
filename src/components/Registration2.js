@@ -1,13 +1,12 @@
-import React, {useState} from 'react'
-import imgbg from '../assets/images/img-bg2.png'
-import btnback from '../assets/images/btn-back.png'
-import Sponsor from './Sponsor'
+import React from "react";
+import imgbg from "../assets/images/img-bg2.png";
+import btnback from "../assets/images/btn-back.png";
+import Sponsor from "./Sponsor";
 
 const Registration2 = () => {
-
   return (
-    <div className='w-full'>
-        <div>
+    <div className="w-full">
+      <div>
         <img className="w-full h-[1500px] object-cover mix-blend-overlay absolute" src={imgbg} alt="/" />
       </div>
 
@@ -29,7 +28,7 @@ const Registration2 = () => {
               <span className="block font-bold mb-1 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Tahu info RITKOLA UTSA dari mana ?</span>
               <form className="flex flex-col">
                 <select className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
-                  <option>  </option>
+                  <option> </option>
                   <option>Medsos</option>
                   <option>Teman</option>
                   <option>Media Cetak / Radio</option>
@@ -39,7 +38,7 @@ const Registration2 = () => {
               <span className="block font-bold mb-1 pt-5 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Alasan mau datang ke acara ini ?</span>
               <form className="flex flex-col">
                 <select className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
-                  <option>  </option>
+                  <option> </option>
                   <option>Teman pangge sekalian cari par</option>
                   <option>Komunitas</option>
                   <option>Party Reggae</option>
@@ -50,7 +49,7 @@ const Registration2 = () => {
               <span className="block font-bold mb-1 pt-5 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Apa pernah dengar "Less Waste Event" ?</span>
               <form className="flex flex-col">
                 <select className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
-                  <option>  </option>
+                  <option> </option>
                   <option>Tidak</option>
                   <option>Pernah</option>
                 </select>
@@ -58,23 +57,21 @@ const Registration2 = () => {
             </div>
           </div>
 
-        <div>
+          <div></div>
 
+          <div className="flex justify-between relative  px-2 pt-10 pb-[100px] sm:pt-20 text-black">
+            <img className="px-[10px] md:px-[65px]" src={btnback} alt="#" />
+            <div className="px-[10px] md:px-[65px]">
+              <button className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-2xl font-bold rounded-full shadow-md shadow-gray-600 w-[137px] h-[60px] md:w-[137px] justify-end">Next</button>
+            </div>
+          </div>
         </div>
-
-        <div className="flex justify-between relative  px-2 pt-10 pb-[100px] sm:pt-20 text-black">
-        <img className='px-[10px] md:px-[65px]' src={btnback} alt='#'/>
-        <div className='px-[10px] md:px-[65px]'>
-        <button className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-2xl font-bold rounded-full shadow-md shadow-gray-600 w-[137px] h-[60px] md:w-[137px] justify-end">Next</button>
-        </div>
-        </div>
+      </div>
+      <div className="pt-[259px]">
+        <Sponsor />
+      </div>
     </div>
-      </div>
-      <div className='pt-[259px]'>
-      <Sponsor />
-      </div>
-      </div>
-  )
-}
+  );
+};
 
-export default Registration2
+export default Registration2;
