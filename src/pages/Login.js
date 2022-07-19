@@ -16,7 +16,7 @@ const Login = () => {
           <div>
             <img className="md:ml-[150px] mx-auto" src={Logo} alt="" />
           </div>
-          <form className="max-w-[400px] w-full mx-auto bg-[#F6F6F6] p-8 px-8 rounded-lg shadow-xl">
+          <form className="max-w-[360px] md:max-w-[400px] w-full mx-auto bg-[#F6F6F6] p-8 px-8 rounded-lg shadow-xl">
             <h2 className="text-3xl text-black font-medium text-center">Masuk</h2>
             <div className="flex flex-col py-2">
               <label>Email</label>
