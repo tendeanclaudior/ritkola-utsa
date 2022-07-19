@@ -63,7 +63,7 @@ const Registration2 = () => {
           <div className="flex justify-between relative  px-2 pt-10 pb-[100px] sm:pt-20 text-black">
             <img className="px-[10px] md:px-[65px]" src={btnback} alt="#" />
             <div className="px-[10px] md:px-[65px]">
-              <Link to="/regis-done">
+              <Link to="/regis3">
               <button className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-2xl font-bold rounded-full shadow-md shadow-gray-600 w-[137px] h-[60px] md:w-[137px] justify-end">Next</button>
               </Link>
             </div>
