@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import List from "./pages/List";
 import Registration from "./components/Registration";
 import Registration2 from "./components/Registration2";
+import RegisDone from "./components/RegisDone";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
 
         <Route path="/regis" element={<Registration />} />
         <Route path="/regis2" element={<Registration2 />} />
+        <Route path="/regis-done" element={<RegisDone />} />
       </Routes>
     </>
   );

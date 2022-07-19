@@ -5,6 +5,7 @@ import imgbg2 from "../assets/images/img-bg2.png";
 
 import { CloudUploadIcon } from "@heroicons/react/solid";
 import Sponsor from "./Sponsor";
+import { Link } from "react-router-dom";
 
 function Registration() {
   return (
@@ -92,7 +93,9 @@ function Registration() {
       </div>
 
       <div className="flex relative justify-center px-2 pt-10 pb-[100px] sm:pt-20 text-black">
+        <Link to="/regis2">
         <button className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-3xl font-bold rounded-full shadow-2xl shadow-gray-300 w-[137px] h-[60px] md:w-[137px] ">Next</button>
+        </Link>
       </div>
 
       <Sponsor />
