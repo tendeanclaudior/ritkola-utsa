@@ -3,6 +3,7 @@ import backgrond from '../assets/images/img-bg2.png'
 import ceklist from '../assets/images/ceklist.png'
 import Sponsor from './Sponsor'
 import qrcode from '../assets/images/qrcode.png'
+import { Link } from 'react-router-dom'
 
 const Registration3 = () => {
   return (
@@ -25,7 +26,9 @@ const Registration3 = () => {
                     <p>MINAHASA  UTARA</p>
                 </div>
                 <div className='mt-[70px] md:mt-[178px] flex justify-end mr-[30px] md:mr-[70px]'>
-                    <img src={qrcode} alt="QR Code" className='w-[40px] h-[40px] md:w-[123px] md:h-[123px]' />
+                    <Link to="/scan">
+                        <img src={qrcode} alt="QR Code" className='w-[40px] h-[40px] md:w-[123px] md:h-[123px]' />
+                    </Link>
                 </div>
             </div>
         </div>

@@ -6,7 +6,8 @@ import Registration from "./components/Registration";
 import Registration2 from "./components/Registration2";
 import Registration3 from "./components/Registration3";
 import RegisDone from "./components/RegisDone";
-
+import Scan
+ from "./components/Scan";
 function App() {
   return (
     <>
@@ -17,6 +18,7 @@ function App() {
         <Route path="/regis" element={<Registration />} />
         <Route path="/regis2" element={<Registration2 />} />
         <Route path="/regis3" element={<Registration3 />} />
+        <Route path="/scan" element={<Scan />} />
         <Route path="/regis-done" element={<RegisDone />} />
       </Routes>
     </>
