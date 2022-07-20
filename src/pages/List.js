@@ -19,6 +19,9 @@ const List = () => {
           <div className="flex flex-col py-2">
             <label>Email</label>
             <input className="rounded-lg mt-2 p-2 border border-black" type="email" placeholder="Tulis email anda..." />
+            <p className="text-gray-300 text-xs pt-1">
+              Masukan email yang sudah terdaftar di <span className="text-red-500">G-Mail</span>
+            </p>
           </div>
           <div className="flex flex-col py-2">
             <label>Password</label>

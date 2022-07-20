@@ -8,7 +8,7 @@ const Registration2 = () => {
   return (
     <div className="w-full">
       <div>
-        <img className="w-full h-[1500px] object-cover mix-blend-overlay absolute" src={imgbg} alt="/" />
+        <img className="w-full h-[1500px] object-cover mix-blend-overlay absolute" src={imgbg} alt="" />
       </div>
 
       <div className="flex relative justify-center px-2 pt-10 sm:pt-20 text-black">
@@ -64,7 +64,7 @@ const Registration2 = () => {
             <img className="px-[10px] md:px-[65px]" src={btnback} alt="#" />
             <div className="px-[10px] md:px-[65px]">
               <Link to="/regis3">
-              <button className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-2xl font-bold rounded-full shadow-md shadow-gray-600 w-[137px] h-[60px] md:w-[137px] justify-end">Next</button>
+                <button className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-2xl font-bold rounded-full shadow-md shadow-gray-600 w-[137px] h-[60px] md:w-[137px] justify-end">Next</button>
               </Link>
             </div>
           </div>
