@@ -23,7 +23,9 @@ const Scan = () => {
             }}
             style={{ width: "100%" }}
           />
-          <p className="text-center">{data}</p>
+          <div className="">
+            <p className="text-center">{data}</p>
+          </div>
         </div>
       </div>
     </div>
