@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import imgbg from "../assets/images/img-bg2.png";
 import btnback from "../assets/images/btn-back.png";
 import Sponsor from "./Sponsor";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Registration2 = () => {
+  const [info, setInfo] = useState("");
+  const [reason, setReason] = useState("");
+  const [have, setHave] = useState("");
+
+  const navigate = useNavigate();
+
+  const onSubmit = () => {
+    console.log("info", info);
+    console.log("reason", reason);
+    console.log("have", have);
+    navigate("/regis3");
+  };
+
   return (
     <div className="w-full">
       <div>
@@ -28,7 +41,7 @@ const Registration2 = () => {
             <div className="col-span-2 pt-8 my-10 md:pt-2">
               <span className="block font-bold mb-1 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Tahu info RITKOLA UTSA dari mana ?</span>
               <form className="flex flex-col">
-                <select className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
+                <select value={info} onChange={(e) => setInfo(e.target.value)} className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
                   <option> </option>
                   <option>Medsos</option>
                   <option>Teman</option>
@@ -38,7 +51,7 @@ const Registration2 = () => {
               </form>
               <span className="block font-bold mb-1 pt-5 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Alasan mau datang ke acara ini ?</span>
               <form className="flex flex-col">
-                <select className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
+                <select value={reason} onChange={(e) => setReason(e.target.value)} className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
                   <option> </option>
                   <option>Teman pangge sekalian cari par</option>
                   <option>Komunitas</option>
@@ -49,7 +62,7 @@ const Registration2 = () => {
               </form>
               <span className="block font-bold mb-1 pt-5 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Apa pernah dengar "Less Waste Event" ?</span>
               <form className="flex flex-col">
-                <select className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
+                <select value={have} onChange={(e) => setHave(e.target.value)} className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
                   <option> </option>
                   <option>Tidak</option>
                   <option>Pernah</option>
@@ -63,9 +76,9 @@ const Registration2 = () => {
           <div className="flex justify-between relative  px-2 pt-10 pb-[100px] sm:pt-20 text-black">
             <img className="px-[10px] md:px-[65px]" src={btnback} alt="#" />
             <div className="px-[10px] md:px-[65px]">
-              <Link to="/regis3">
-                <button className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-2xl font-bold rounded-full shadow-md shadow-gray-600 w-[137px] h-[60px] md:w-[137px] justify-end">Next</button>
-              </Link>
+              <button onClick={onSubmit} className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-2xl font-bold rounded-full shadow-md shadow-gray-600 w-[137px] h-[60px] md:w-[137px] justify-end">
+                Next
+              </button>
             </div>
           </div>
         </div>

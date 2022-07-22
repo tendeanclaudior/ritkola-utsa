@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import Bgimg from "../assets/images/img-bg2.png";
 import Logo from "../assets/Logo/Logo.png";
@@ -11,13 +11,12 @@ const List = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await signUp(email, password);
-      navigate("/regis");
     } catch (error) {
       console.log(error);
     }

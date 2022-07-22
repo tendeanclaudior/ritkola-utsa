@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 
 // import imgbg from "../assets/images/img-bg.png";
 import imgbg2 from "../assets/images/img-bg2.png";
 
-import { CloudUploadIcon } from "@heroicons/react/solid";
 import Sponsor from "./Sponsor";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import UploadPhoto from "./UploadPhoto";
+import Input from "./Input";
 
-function Registration() {
+const Registration = () => {
+  const [name, setName] = useState("");
+  const [nowa, setNowa] = useState("");
+  const [sosmed, setSosmed] = useState("");
+  const [city, setCity] = useState("");
+
+  const [image, setImage] = useState("");
+  const [imagePreview, setImagePreview] = useState(null);
+
+  const navigate = useNavigate();
+
+  const onSubmit = () => {
+    console.log("title", name);
+    console.log("nowa", nowa);
+    console.log("sosmed", sosmed);
+    console.log("city", city);
+    console.log("image", image);
+    navigate("/regis2");
+  };
+
+  const onUploadImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+    setImagePreview(URL.createObjectURL(file));
+  };
   return (
     <div className="w-full">
       <div>
@@ -36,56 +61,27 @@ function Registration() {
             <p className="text-gray-500 text-xl">informasi yang diberikan dapat membantu kami!</p>
             <hr />
             <div className="col-span-2 pt-8 my-10 md:pt-2">
-              <span className="block font-bold mb-1 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Nama</span>
-              <form className="flex flex-col">
-                <input className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black" type="name" placeholder="Tulis nama lengkap anda..." />
-              </form>
-              <span className="block font-bold mb-1 pt-5 text-black after:content-['*'] after:text-red-500 after:ml-0.5">No.WA</span>
-              <form className="flex flex-col">
-                <input className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black" type="name" placeholder="Tulis nomor whatsapp anda..." />
-              </form>
-              <span className="block font-bold mb-1 pt-5 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Asal Kota</span>
-              <form className="flex flex-col">
-                <select className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
-                  <option>--Pilih Kota Anda--</option>
-                  <option>Bitung</option>
-                  <option>Kotamobagu</option>
-                  <option>Manado</option>
-                  <option>Minahasa</option>
-                  <option>Minahasa Utara</option>
-                  <option>Minahasa Selatan</option>
-                  <option>Minahasa Tenggara</option>
-                  <option>Lain-Lain</option>
-                </select>
-              </form>
-              <span className="block font-bold mb-1 pt-5 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Nama Social Media FB/IG</span>
-              <form className="flex flex-col">
-                <input className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black" type="name" placeholder="Tulis sosmed anda..." />
-              </form>
-              <span className="block font-bold mb-1 pt-5 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Upload Photo</span>
-              {/* <form className="flex items-center space-x-6">
-                <div className="shrink-0">
-                  <img className="h-16 w-16 object-cover rounded-full" src={imgbg} alt="uploadphoto" />
-                </div>
-                <label className="block">
-                  <input
-                    type="file"
-                    className="block w-full text-sm text-slate-500
-                               file:mr-4 file:py-2 file:px-4
-                               file:rounded-full file:border-0
-                               file:text-sm file:font-semibold file:bg-gradient-to-b
-                               file:from-[#165E00] file:via-[#FFDD00] file:to-[#FF0000] file:text-black
-                               hover:file:bg-white"
-                  />
-                </label>
-              </form> */}
-              <div className="bg-white w-[284px] h-16 p-2 mr-4">
-                <div className="">
-                  <p className="flex py-2 text-gray-400">
-                    <CloudUploadIcon className="w-8 mr-5 text-black" />
-                    Unggah File
-                  </p>
-                </div>
+              <Input title={"Nama"} placeholder={"Tulis nama anda..."} value={name} onChange={(e) => setName(e.target.value)} />
+              <Input title={"No. WA"} placeholder={"Tulis nomor WhatsApp anda..."} value={nowa} onChange={(e) => setNowa(e.target.value)} />
+              <div className="p-2">
+                <span className="block font-bold mb-1 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Asal Kota</span>
+                <form className="flex flex-col">
+                  <select value={city} onChange={(e) => setCity(e.target.value)} className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
+                    <option>--Pilih Kota Anda--</option>
+                    <option>Bitung</option>
+                    <option>Kotamobagu</option>
+                    <option>Manado</option>
+                    <option>Minahasa</option>
+                    <option>Minahasa Utara</option>
+                    <option>Minahasa Selatan</option>
+                    <option>Minahasa Tenggara</option>
+                    <option>Lain-Lain</option>
+                  </select>
+                </form>
+              </div>
+              <Input title={"Nama Social Media FB/IG"} placeholder={"Tulis Sosmed anda..."} value={sosmed} onChange={(e) => setSosmed(e.target.value)} />
+              <div className="p-2">
+                <UploadPhoto onChange={(e) => onUploadImage(e)} img={imagePreview} />
               </div>
             </div>
           </div>
@@ -93,14 +89,14 @@ function Registration() {
       </div>
 
       <div className="flex relative justify-center px-2 pt-10 pb-[100px] sm:pt-20 text-black">
-        <Link to="/regis2">
-        <button className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-3xl font-bold rounded-full shadow-2xl shadow-gray-300 w-[137px] h-[60px] md:w-[137px] ">Next</button>
-        </Link>
+        <button onClick={onSubmit} className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-3xl font-bold rounded-full shadow-2xl shadow-gray-300 w-[137px] h-[60px] md:w-[137px] ">
+          Next
+        </button>
       </div>
 
       <Sponsor />
     </div>
   );
-}
+};
 
 export default Registration;

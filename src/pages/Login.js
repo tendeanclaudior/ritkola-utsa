@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Bgimg from "../assets/images/img-bg2.png";
 import Logo from "../assets/Logo/Logo.png";
@@ -7,17 +7,15 @@ import Logo from "../assets/Logo/Logo.png";
 import { UserAuth } from "../context/AuthContext";
 
 const Login = () => {
+  const { logIn } = UserAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
-  const { logIn } = UserAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await logIn(email, password);
-      navigate("/regis3");
     } catch (error) {
       console.log(error);
     }

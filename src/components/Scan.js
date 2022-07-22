@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
+import { useNavigate } from "react-router-dom";
 
 const Scan = () => {
-  const [data, setData] = useState("No result");
+  const [setData] = useState("No result");
+
+  const navigate = useNavigate();
 
   return (
     <div className="flex-row">
@@ -15,6 +18,7 @@ const Scan = () => {
             onResult={(result, error) => {
               if (!!result) {
                 setData(result?.text);
+                navigate("/regis-done");
               }
 
               if (!!error) {
@@ -23,9 +27,9 @@ const Scan = () => {
             }}
             style={{ width: "100%" }}
           />
-          <div className="">
+          {/* <div className="">
             <p className="text-center">{data}</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
