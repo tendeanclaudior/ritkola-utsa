@@ -3,7 +3,9 @@ import { auth, db } from "../firebase";
 
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
-import { setDoc, doc } from "firebase/firestore";
+// import { setDoc, doc } from "firebase/firestore";
+import { ref, set } from "firebase/database";
+// import { v4 } from "uuid";
 
 const AuthContext = createContext();
 
@@ -11,11 +13,28 @@ export function AuthContextProvider({ children }) {
   const [user, setUser] = useState({});
 
   function signUp(email, password) {
+    // const uuid = v4();
     createUserWithEmailAndPassword(auth, email, password);
-    setDoc(doc(db, "users", email), {
+    set(ref(db, "users", email), {
       email: email,
     });
+    // set(ref(db, `/users/${uuid}`, email), {
+    //   email: email,
+    // });
   }
+
+  // function sendData(name, nowa, city, sosmed, info, reason, once, image) {
+  //   return setDoc(doc(db, "users", name), {
+  //     nama: name,
+  //     noWA: nowa,
+  //     kota: city,
+  //     medsos: sosmed,
+  //     info: info,
+  //     alasan: reason,
+  //     pernah: once,
+  //     foto: image,
+  //   });
+  // }
 
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);

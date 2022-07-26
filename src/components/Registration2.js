@@ -1,89 +1,38 @@
-import React, { useState } from "react";
-import imgbg from "../assets/images/img-bg2.png";
-import btnback from "../assets/images/btn-back.png";
+import React from "react";
+import backgrond from "../assets/images/img-bg2.png";
+import ceklist from "../assets/images/ceklist.png";
 import Sponsor from "./Sponsor";
-import { useNavigate } from "react-router-dom";
+import qrcode from "../assets/images/qrcode.png";
+import { Link } from "react-router-dom";
 
 const Registration2 = () => {
-  const [info, setInfo] = useState("");
-  const [reason, setReason] = useState("");
-  const [have, setHave] = useState("");
-
-  const navigate = useNavigate();
-
-  const onSubmit = () => {
-    console.log("info", info);
-    console.log("reason", reason);
-    console.log("have", have);
-    navigate("/regis3");
-  };
-
   return (
-    <div className="w-full">
-      <div>
-        <img className="w-full h-[1500px] object-cover mix-blend-overlay absolute" src={imgbg} alt="" />
-      </div>
-
-      <div className="flex relative justify-center px-2 pt-10 sm:pt-20 text-black">
-        <div className="bg-white rounded-xl shadow-2xl shadow-gray-400 w-[602px] md:w-[1242px] ">
-          <div className="text-center">
-            <h1 className="font-bold text-2xl my-6">Pendaftaran Even Ritkola Utsa</h1>
+    <div>
+      <div className="flex">
+        <div>
+          <img src={backgrond} alt="/" className="w-full md:h-[1800px] object-cover mix-blend-overlay absolute" />
+        </div>
+        <div className=" w-[300px] h-[500px] md:w-[1088px] md:h-[1660px] bg-[#EFF0F6] shadow-xl shadow-gray-400 relative rounded-3xl mx-auto mt-[40px] md:mt-[109px]">
+          <div className="flex mt-[60px] md:mt-[231px]">
+            <p className="text-[20px] md:text-[60px] mx-auto">Registrasi Berhasil!</p>
+          </div>
+          <div className="flex mt-[50px] md:mt-[189px]">
+            <img src={ceklist} alt="ceklist" className="h-[100px] w-[100px] md:h-[263px] md:w-[263px] mx-auto" />
+          </div>
+          <div className="text-center text-[13px] md:text-[40px] mt-[50px] md:mt-[261px]">
+            <p>Terima Kasih sudah menjadi bagian dari</p>
+            <p>Ritkola Utsa dan sudah mensupport</p>
+            <p>ekosistem ekonomi kreatif</p>
+            <p>MINAHASA UTARA</p>
+          </div>
+          <div className="mt-[70px] md:mt-[178px] flex justify-end mr-[30px] md:mr-[70px]">
+            <Link to="/scan">
+              <img src={qrcode} alt="QR Code" className="w-[40px] h-[40px] md:w-[123px] md:h-[123px]" />
+            </Link>
           </div>
         </div>
       </div>
-
-      <div className="flex justify-center relative gap-x-8 px-4 pt-20 sm:pt-20 text-black">
-        <div className="bg-[#FAF8F8] rounded-xl shadow-2xl shadow-gray-400 w-[700px] md:w-[700px]">
-          <div className="p-4">
-            <h3 className="font-bold text-2xl">Contact Details</h3>
-            <p className="text-gray-500 text-xl">informasi yang diberikan dapat membantu kami!</p>
-            <hr />
-            <div className="col-span-2 pt-8 my-10 md:pt-2">
-              <span className="block font-bold mb-1 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Tahu info RITKOLA UTSA dari mana ?</span>
-              <form className="flex flex-col">
-                <select value={info} onChange={(e) => setInfo(e.target.value)} className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
-                  <option> </option>
-                  <option>Medsos</option>
-                  <option>Teman</option>
-                  <option>Media Cetak / Radio</option>
-                  <option>Lain-lain...</option>
-                </select>
-              </form>
-              <span className="block font-bold mb-1 pt-5 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Alasan mau datang ke acara ini ?</span>
-              <form className="flex flex-col">
-                <select value={reason} onChange={(e) => setReason(e.target.value)} className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
-                  <option> </option>
-                  <option>Teman pangge sekalian cari par</option>
-                  <option>Komunitas</option>
-                  <option>Party Reggae</option>
-                  <option>Lokal kultur dan market</option>
-                  <option>Lain-lain...</option>
-                </select>
-              </form>
-              <span className="block font-bold mb-1 pt-5 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Apa pernah dengar "Less Waste Event" ?</span>
-              <form className="flex flex-col">
-                <select value={have} onChange={(e) => setHave(e.target.value)} className="w-[284px] h-16 p-2 mr-4 rounded-full  text-black">
-                  <option> </option>
-                  <option>Tidak</option>
-                  <option>Pernah</option>
-                </select>
-              </form>
-            </div>
-          </div>
-
-          <div></div>
-
-          <div className="flex justify-between relative  px-2 pt-10 pb-[100px] sm:pt-20 text-black">
-            <img className="px-[10px] md:px-[65px]" src={btnback} alt="#" />
-            <div className="px-[10px] md:px-[65px]">
-              <button onClick={onSubmit} className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-2xl font-bold rounded-full shadow-md shadow-gray-600 w-[137px] h-[60px] md:w-[137px] justify-end">
-                Next
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pt-[259px]">
+      <div className="mt-[80px] md:mt-[197px]">
         <Sponsor />
       </div>
     </div>
