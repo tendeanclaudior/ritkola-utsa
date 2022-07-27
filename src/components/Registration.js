@@ -6,11 +6,12 @@ import Sponsor from "./Sponsor";
 // import { useNavigate } from "react-router-dom";
 import UploadPhoto from "./UploadPhoto";
 import Input from "./Input";
-
+import { auth } from "../firebase";
 import { db, storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { v4 } from "uuid";
+
 import { ref as r, set } from "firebase/database";
+import { uid } from "uid";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -29,8 +30,8 @@ const Registration = () => {
   // const navigate = useNavigate();
 
   const onSubmit = () => {
-    const uuid = v4();
-    set(r(db, `/${uuid}`), {
+
+    set(r(db, `users/${auth.currentUser.uid}`), {
       nama: name,
       noWA: nowa,
       medsos: sosmed,
@@ -49,13 +50,13 @@ const Registration = () => {
     setValue("");
     setWhy("");
     // navigate("/regis2");
-    if (image == null) return;
-    const imageRef = ref(storage, `images/${image.name + v4()}`);
-    uploadBytes(imageRef, image).then((snaphsot) => {
-      getDownloadURL(snaphsot.ref).then((url) => {
-        setUpImage((prev) => [...prev, url]);
-      });
-    });
+    // if (image == null) return;
+    // const imageRef = ref(storage, `images/${image.name + v4()}`);
+    // uploadBytes(imageRef, image).then((snaphsot) => {
+    //   getDownloadURL(snaphsot.ref).then((url) => {
+    //     setUpImage((prev) => [...prev, url]);
+    //   });
+    // });
   };
 
   const onUploadImage = (e) => {

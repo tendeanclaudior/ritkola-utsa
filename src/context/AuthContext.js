@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthState
 // import { setDoc, doc } from "firebase/firestore";
 import { ref, set } from "firebase/database";
 // import { v4 } from "uuid";
+//import { uid } from "uid";
 
 const AuthContext = createContext();
 
@@ -13,11 +14,8 @@ export function AuthContextProvider({ children }) {
   const [user, setUser] = useState({});
 
   function signUp(email, password) {
-    // const uuid = v4();
+//    const uuid = uid(); 
     createUserWithEmailAndPassword(auth, email, password);
-    set(ref(db, "users", email), {
-      email: email,
-    });
     // set(ref(db, `/users/${uuid}`, email), {
     //   email: email,
     // });

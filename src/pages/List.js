@@ -15,7 +15,7 @@ const List = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+    try { 
       await signUp(email, password);
       navigate("/regis");
     } catch (error) {
