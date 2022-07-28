@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-
 import imgbg2 from "../assets/images/img-bg2.png";
-
+import ErrorMsg from "./ErrorMsg";
 import Sponsor from "./Sponsor";
 // import { useNavigate } from "react-router-dom";
 import UploadPhoto from "./UploadPhoto";
@@ -9,9 +8,8 @@ import Input from "./Input";
 import { auth } from "../firebase";
 import { db, storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
 import { ref as r, set } from "firebase/database";
-import { uid } from "uid";
+import { Navigate } from "react-router-dom";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -26,44 +24,60 @@ const Registration = () => {
   const [image, setImage] = useState("");
   const [upImage, setUpImage] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
-
+  const [error, setError] = useState(false)
   // const navigate = useNavigate();
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
 
-    set(r(db, `users/${auth.currentUser.uid}`), {
-      nama: name,
-      noWA: nowa,
-      medsos: sosmed,
-      kota: city,
-      informasi: info,
-      alasan: reason,
-      value: value,
-      dengar: why,
-    });
-    setName("");
-    setNowa("");
-    setCity("");
-    setSosmed("");
-    setInfo("");
-    setReason("");
-    setValue("");
-    setWhy("");
+    if(name.length==0){
+      setError(true)
+    }if(nowa.length==0){
+      setError(true)
+    }if(city.length==0){
+      setError(true)
+    }if(sosmed.length==0){
+      setError(true)
+    }if(info.length==0){
+      setError(true)
+    }if(reason.length==0){
+      setError(true)
+    }if(value.length==0){
+      setError(true)
+    }
+
+      e.preventDefault()
+      set(r(db, `users/${auth.currentUser.uid}`), {
+        nama: name,
+        noWA: nowa,
+        medsos: sosmed,
+        kota: city,
+        informasi: info,
+        alasan: reason,
+        value: value,
+        dengar: why,
+      });
+      setError(true)
+
     // navigate("/regis2");
-    // if (image == null) return;
-    // const imageRef = ref(storage, `images/${image.name + v4()}`);
-    // uploadBytes(imageRef, image).then((snaphsot) => {
-    //   getDownloadURL(snaphsot.ref).then((url) => {
-    //     setUpImage((prev) => [...prev, url]);
-    //   });
-    // });
-  };
+    if (image == null) return;
+    const imageRef = ref(storage, `images/${auth.currentUser.uid}`);
+    uploadBytes(imageRef, image).then((snaphsot) => {
+      getDownloadURL(snaphsot.ref).then((url) => {
+        setUpImage((prev) => [...prev, url]);
+      });
+    });
+
+  }
+
 
   const onUploadImage = (e) => {
     const file = e.target.files[0];
     setImage(file);
     setImagePreview(URL.createObjectURL(file));
   };
+
+  
+  
   return (
     <div className="w-full">
       <div>
@@ -93,8 +107,14 @@ const Registration = () => {
             <hr />
             <div className="col-span-2 pt-8 my-10 md:pt-2">
               <Input name={"name"} title={"Nama"} placeholder={"Tulis nama anda..."} value={name} onChange={(e) => setName(e.target.value)} />
+              {error&&name.length<=0?
+              <ErrorMsg/>:""}
               <Input name={"nowa"} title={"No. WA"} placeholder={"Tulis nomor WhatsApp anda..."} value={nowa} onChange={(e) => setNowa(e.target.value)} />
+              {error&&nowa.length<=0?
+              <ErrorMsg/>:""}
               <Input name={"sosmed"} title={"Nama Social Media FB/IG"} placeholder={"Tulis Sosmed anda..."} value={sosmed} onChange={(e) => setSosmed(e.target.value)} />
+              {error&&sosmed.length<=0?
+              <ErrorMsg/>:""}
               <div className="p-2">
                 <span className="block font-bold mb-1 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Asal Kota</span>
                 <form className="flex flex-col">
@@ -110,6 +130,8 @@ const Registration = () => {
                     <option>Lain-Lain</option>
                   </select>
                 </form>
+                {error&&city.length<=0?
+                <ErrorMsg/>:""}
               </div>
               <div className="p-2">
                 <span className="block font-bold mb-1 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Tahu info RITKOLA dari mana?</span>
@@ -122,6 +144,8 @@ const Registration = () => {
                     <option>Lain-lain...</option>
                   </select>
                 </form>
+                {error&&info.length<=0?
+                <ErrorMsg/>:""}
               </div>
               <div className="p-2">
                 <span className="block font-bold mb-1 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Alasan mau Datang ke acara ini?</span>
@@ -135,6 +159,8 @@ const Registration = () => {
                     <option>Lain-lain...</option>
                   </select>
                 </form>
+                {error&&reason.length<=0?
+                <ErrorMsg/>:""}
               </div>
               <div className="p-2">
                 <span className="block font-bold mb-1 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Apa pernah dengar "Less Waste Event" ?</span>
@@ -145,6 +171,8 @@ const Registration = () => {
                     <option value={"true"}>Pernah</option>
                   </select>
                 </form>
+                {error&&value.length<=0?
+                <ErrorMsg/>:""}
                 {value === "true" && (
                   <form>
                     <span className="block font-bold mb-1 pt-5 text-black after:content-['*'] after:text-red-500 after:ml-0.5">Kalo pernah menurut ngoni apa?</span>
