@@ -5,8 +5,7 @@ import Sponsor from "./Sponsor";
 // import { useNavigate } from "react-router-dom";
 import UploadPhoto from "./UploadPhoto";
 import Input from "./Input";
-import { auth } from "../firebase";
-import { db, storage } from "../firebase";
+import { db, storage, auth } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { ref as r, set } from "firebase/database";
 import { Navigate } from "react-router-dom";
@@ -87,7 +86,7 @@ const Registration = () => {
       <div className="flex relative justify-center px-2 pt-10 sm:pt-20 text-black">
         <div className="bg-white rounded-xl shadow-2xl shadow-black-400 w-[602px] md:w-[1242px] ">
           <div className="text-center">
-            <h1 className="font-bold text-2xl my-6">Pendaftaran Even Ritkola Utsa</h1>
+            <h1 className="font-bold text-2xl my-6">Pendaftaran Event Ritkola Utsa</h1>
           </div>
         </div>
       </div>

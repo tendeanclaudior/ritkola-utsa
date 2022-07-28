@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 
 import { storage } from "../firebase";
 import { listAll, ref, getDownloadURL } from "firebase/storage";
+import { updateCurrentUser } from "firebase/auth";
 // import { onValue, ref as r } from "firebase/database";
 
 const RegisDone = () => {
@@ -25,6 +26,13 @@ const RegisDone = () => {
   //     });
   //   }
   // });
+  const truncateString = (str, num) => {
+    if(str?.length > num) {
+        return str.slice(0, num) + '...';
+    }else {
+        return str;
+    }
+  }
 
   useEffect(() => {
     listAll(imageListRef).then((res) => {
@@ -56,7 +64,7 @@ const RegisDone = () => {
             </div>
             <div className="flex flex-direction:row ml-[110px] md:ml-[248px]">
               <img src={kupon} alt="/" className="w-[42px] h-[18px] md:w-[85px] md:h-[37px] mt-[30px] md:mt-[61px] mr-[28px] md:mr-[55px]" />
-              <h1 className="text-[20px] md:text-[40px] mt-[24px] md:mt-[47px]">{id}</h1>
+              <h1 className="text-[20px] md:text-[40px] mt-[24px] md:mt-[47px]">{truncateString(id, 8)}</h1>
             </div>
           </div>
           <div className="text-center text-[18px] md:text-[40px] mt-[100px] md:mt-[165px]">

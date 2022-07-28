@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
 
 const Scan = () => {
-  const [setData] = useState("No result");
+  const [data, setData] = useState("No result");
 
   const navigate = useNavigate();
 
@@ -18,7 +19,7 @@ const Scan = () => {
             onResult={(result, error) => {
               if (!!result) {
                 setData(result?.text);
-                navigate("/regis-done");
+                navigate(`/regis-done/${auth.currentUser.uid}`);
               }
 
               if (!!error) {
@@ -27,9 +28,9 @@ const Scan = () => {
             }}
             style={{ width: "100%" }}
           />
-          {/* <div className="">
+          <div className="">
             <p className="text-center">{data}</p>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
