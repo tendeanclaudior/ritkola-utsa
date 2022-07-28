@@ -19,7 +19,9 @@ const Scan = () => {
             onResult={(result, error) => {
               if (!!result) {
                 setData(result?.text);
-                navigate(`/regis-done/${auth.currentUser.uid}`);
+                if(result?.text=="PT KTP FIK Unklab Ritkola-Utsa"){
+                  navigate(`/regis-done/${auth.currentUser.uid}`);
+                }
               }
 
               if (!!error) {
