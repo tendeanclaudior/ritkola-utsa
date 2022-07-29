@@ -46,14 +46,15 @@ const Registration = () => {
 
       e.preventDefault()
       set(r(db, `users/${auth.currentUser.uid}`), {
-        nama: name,
-        noWA: nowa,
-        medsos: sosmed,
-        kota: city,
-        informasi: info,
-        alasan: reason,
-        value: value,
-        dengar: why,
+        a_nama: name,
+        b_nomor_WA: nowa,
+        c_medsos: sosmed,
+        d_kota: city,
+        e_dapat_info: info,
+        f_alasan_datang: reason,
+        g_tahu_less_waste_event: value,
+        h_penjelasan: why,
+        i_absensi: "Tidak hadir",
       });
       setError(true)
 

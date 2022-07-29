@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { ref as r, update } from "firebase/database";
 
 const Scan = () => {
   const [data, setData] = useState("No result");
@@ -21,6 +22,9 @@ const Scan = () => {
                 setData(result?.text);
                 if(result?.text=="PT KTP FIK Unklab Ritkola-Utsa"){
                   navigate(`/regis-done/${auth.currentUser.uid}`);
+                  update(r(db, `users/${auth.currentUser.uid}`), {
+                    i_absensi: "hadir",
+                  });
                 }
               }
 
