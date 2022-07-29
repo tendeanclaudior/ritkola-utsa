@@ -5,17 +5,19 @@ import Bgimg from "../assets/images/img-bg2.png";
 import Logo from "../assets/Logo/Logo.png";
 
 import { UserAuth } from "../context/AuthContext";
-
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const { logIn } = UserAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await logIn(email, password);
+      navigate("/regis2")
     } catch (error) {
       console.log(error);
     }
