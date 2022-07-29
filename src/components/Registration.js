@@ -78,6 +78,7 @@ const Registration = () => {
         g_tahu_less_waste_event: value,
         h_penjelasan: why,
         i_absensi: "Tidak hadir",
+        j_foto: baseImage,
       });
       setError(true)
 
