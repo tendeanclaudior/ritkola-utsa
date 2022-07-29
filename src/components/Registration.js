@@ -9,6 +9,7 @@ import { db, storage, auth } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { ref as r, set } from "firebase/database";
 import { Navigate } from "react-router-dom";
+import { base64 } from "@firebase/util";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -24,7 +25,29 @@ const Registration = () => {
   const [upImage, setUpImage] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
   const [error, setError] = useState(false)
+  const [baseImage, setBaseImage] = useState("");
   // const navigate = useNavigate();
+
+  const uploadImage = async (e) => {
+    const file = e.target.files[0]
+    const base64 = await convertBase64(file);
+    setBaseImage(base64)
+    console.log("base64", base64)
+  }
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) =>{
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file)
+
+      fileReader.onload = () => {
+        resolve(fileReader.result)
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      }
+    })
+  }
 
   const onSubmit = (e) => {
 
@@ -67,17 +90,7 @@ const Registration = () => {
       });
     });
 
-  }
-
-
-  const onUploadImage = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-    setImagePreview(URL.createObjectURL(file));
-  };
-
-  
-  
+  }  
   return (
     <div className="w-full">
       <div>
@@ -181,7 +194,7 @@ const Registration = () => {
                 )}
               </div>
               <div className="p-2">
-                <UploadPhoto onChange={(e) => onUploadImage(e)} img={imagePreview} />
+                <UploadPhoto onChange={(e) => uploadImage(e)} img={baseImage}  />
               </div>
             </div>
           </div>
