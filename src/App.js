@@ -8,6 +8,7 @@ import RegisDone from "./components/RegisDone";
 import Scan from "./components/Scan";
 import ForgetPass from "./pages/ForgetPassword";
 import { AuthContextProvider } from "./context/AuthContext";
+import { ProtectedRoute } from './components/ProtectedRoute'
 
 function App() {
   return (
@@ -16,11 +17,30 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/list" element={<List />} />
-
-          <Route path="/regis" element={<Registration />} />
-          <Route path="/regis2" element={<Registration2 />} />
-          <Route path="/regis-done/:id" element={<RegisDone />} />
-          <Route path="/scan" element={<Scan />} />
+          <Route path="/regis" 
+            element={
+            <ProtectedRoute>
+               <Registration />
+            </ProtectedRoute>
+          } />
+          <Route path="/regis2" 
+            element={
+            <ProtectedRoute>
+              <Registration2 />
+            </ProtectedRoute> 
+          } />
+          <Route path="/regis-done/:id" 
+            element={
+            <ProtectedRoute>
+              <RegisDone />
+            </ProtectedRoute>
+          } />
+          <Route path="/scan" 
+            element={
+            <ProtectedRoute>
+              <Scan />
+            </ProtectedRoute> 
+          } />
           <Route path="/forgetpas" element={<ForgetPass />} />
         </Routes>
       </AuthContextProvider>
