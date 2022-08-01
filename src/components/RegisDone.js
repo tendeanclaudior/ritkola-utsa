@@ -1,65 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import background from "../assets/images/img-bg2.png";
 import kupon from "../assets/images/kupon.png";
 import idcard from "../assets/images/idcard.png";
 import Sponsor from "./Sponsor";
 import { useParams } from "react-router-dom";
-
-import { storage, db, app, fireDb } from "../firebase";
-import { listAll, ref, getDownloadURL } from "firebase/storage";
-import { updateCurrentUser } from "firebase/auth";
-import { onValue } from "firebase/database";
-// import { onValue, ref as r } from "firebase/database";
-
+import { getDatabase, ref, child, get } from "firebase/database";
+import { auth } from "../firebase";
 
 const RegisDone = () => {
   const { id } = useParams();
-  const [image, setImage] = useState([]);
-  const [name, setName] = useState("");
-  const [data, setData] = useState({});
-  // const [name, setName] = useState([]);
-  const [display, setDisplay] =  useState();
-  const imageListRef = ref(storage, "images/");
+  const [isLoading, setIsLoading] = useState(true);
+  const snaphsot = useRef(null);
+  const error = useRef(null);
 
-  // onValue(r(db), (snapshot) => {
-  //   const data = snapshot.val();
-  //   if (data !== null) {
-  //     Object.values(data).map((name) => {
-  //       setName((oldArray) => [...oldArray, name]);
-  //     });
-  //   }
-  // });
-  const truncateString = (str, num) => {
-    if(str?.length > num) {
-        return str.slice(0, num);
-    }else {
-        return str;
+  const getValues = async () => {
+    try {
+      const database = getDatabase();
+      const rootReference = ref(database);
+      const dbGet = await get(child(rootReference, `users/${auth.currentUser.uid}`));
+      const dbValue = dbGet.val();
+      console.log("test", dbValue);
+      snaphsot.current = dbValue;
+    } catch (getError) {
+      error.current = getError.message;
     }
-  }
-
-  // useEffect(() => {
-  //   const displayRef = firebase.database().ref('users');
-  //   displayRef.on('value', (snapshot) => {
-  //     const displays = snapshot.val()
-  //     const display = [];
-  //     for(let id in displays){
-  //       display.push(displays[id]);
-  //     }
-  //     console.log(display);
-  //     setDisplay(display);
-  //   })
-  // }, [])
+    setIsLoading(false);
+  };
+  
 
   useEffect(() => {
-    listAll(imageListRef).then((res) => {
-      res.items.forEach((item) => {
-        getDownloadURL(item).then((url) => {
-          setImage((prev) => [...prev, url]);
-        });
-      });
-    });
+    getValues();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="text-center pt-[300px]">
+        <p className="text-4xl">memproses data...</p>
+      </div>
+    );
+  }
+
+  const users = snaphsot.current;
+  const data = Object.values(users);
+  const name = data[0];
+  console.log({ users, data });
+
+  const truncateString = (str, num) => {
+    if (str?.length > num) {
+      return str.slice(0, num);
+    } else {
+      return str;
+    }
+  };
+  console.log(data[0])
 
   return (
     <div>
@@ -73,12 +67,19 @@ const RegisDone = () => {
               return <img src={url} alt="/" className="w-[70px] h-[70px] md:w-[200px] md:h-[200px] mx-auto rounded-full" />;
             })} */}
           </div>
-          <div className="">
+          <div>
             <div className="flex flex-direction:row mt-[60px] md:mt-[98px] ml-[60px] md:ml-[238px]">
               <img src={idcard} alt="/" className="w-[52px] h-[39px] md:w-[106px] md:h-[78px] mr-[22px] md:mr-[44px]" />
-              <h1 className="text-[20px] md:text-[40px] mt-[8px] md:mt-[15px]" value={name || ""}></h1>
-              {/* {name.map((name) => {})} */}
+              {/* {data.map((item) => {
+                return (
+                  <div key={item[0]}>
+                    <h1 className="text-[20px] md:text-[40px] mt-[8px] md:mt-[15px]">{item[0]}</h1>
+                  </div>
+                ); 
+              })} */}
+              <h1 className="text-[20px] md:text-[40px] mt-[8px] md:mt-[15px]">{truncateString(name, 10)} . . .</h1>
             </div>
+              
             <div className="flex flex-direction:row ml-[65px] md:ml-[248px]">
               <img src={kupon} alt="/" className="w-[42px] h-[18px] md:w-[85px] md:h-[37px] mt-[30px] md:mt-[61px] mr-[28px] md:mr-[55px]" />
               <h1 className="text-[20px] md:text-[40px] mt-[24px] md:mt-[47px]">{truncateString(id, 8)}</h1>
