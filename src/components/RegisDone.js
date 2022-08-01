@@ -44,6 +44,7 @@ const RegisDone = () => {
   const users = snaphsot.current;
   const data = Object.values(users);
   const name = data[0];
+  const imgProfile = data[9];
   console.log({ users, data });
 
   const truncateString = (str, num) => {
@@ -62,10 +63,11 @@ const RegisDone = () => {
           <img src={background} alt="/" className="w-full md:h-[1800px] object-cover mix-blend-overlay absolute" />
         </div>
         <div className="w-[320px] h-[634px] md:w-[860px] md:h-[1214px] relative bg-[#FAF8F8] mx-auto mt-[100px] md:mt-[305px] rounded-3xl">
-          <div className="w-[200px] h-[200px] md:w-[450px] md:h-[450px] bg-white mx-auto mt-[62px] pt-[65px] md:pt-[128px] rounded-full ">
+          <div className="w-[200px] h-[200px] md:w-[450px] md:h-[450px] bg-gray-100 mx-auto mt-[62px] pt-[15px] md:pt-[35px] rounded-full ">
             {/* {image.map((url) => {
               return <img src={url} alt="/" className="w-[70px] h-[70px] md:w-[200px] md:h-[200px] mx-auto rounded-full" />;
             })} */}
+            <img src={imgProfile} alt="/" className="w-[170px] h-[170px] md:w-[380px] md:h-[380px] mx-auto rounded-full" />
           </div>
           <div>
             <div className="flex flex-direction:row mt-[60px] md:mt-[98px] ml-[60px] md:ml-[238px]">
