@@ -51,19 +51,19 @@ const Registration = () => {
 
   const onSubmit = (e) => {
 
-    if(name.length==0){
+    if(name.length === 0){
       setError(true)
-    }if(nowa.length==0){
+    }if(nowa.length === 0){
       setError(true)
-    }if(city.length==0){
+    }if(city.length === 0){
       setError(true)
-    }if(sosmed.length==0){
+    }if(sosmed.length === 0){
       setError(true)
-    }if(info.length==0){
+    }if(info.length === 0){
       setError(true)
-    }if(reason.length==0){
+    }if(reason.length === 0){
       setError(true)
-    }if(value.length==0){
+    }if(value.length === 0){
       setError(true)
     }
 

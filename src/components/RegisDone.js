@@ -64,21 +64,11 @@ const RegisDone = () => {
         </div>
         <div className="w-[320px] h-[634px] md:w-[860px] md:h-[1214px] relative bg-[#FAF8F8] mx-auto mt-[100px] md:mt-[305px] rounded-3xl">
           <div className="w-[200px] h-[200px] md:w-[450px] md:h-[450px] bg-gray-100 mx-auto mt-[62px] pt-[15px] md:pt-[35px] rounded-full ">
-            {/* {image.map((url) => {
-              return <img src={url} alt="/" className="w-[70px] h-[70px] md:w-[200px] md:h-[200px] mx-auto rounded-full" />;
-            })} */}
             <img src={imgProfile} alt="/" className="w-[170px] h-[170px] md:w-[380px] md:h-[380px] mx-auto rounded-full" />
           </div>
           <div>
             <div className="flex flex-direction:row mt-[60px] md:mt-[98px] ml-[60px] md:ml-[238px]">
               <img src={idcard} alt="/" className="w-[52px] h-[39px] md:w-[106px] md:h-[78px] mr-[22px] md:mr-[44px]" />
-              {/* {data.map((item) => {
-                return (
-                  <div key={item[0]}>
-                    <h1 className="text-[20px] md:text-[40px] mt-[8px] md:mt-[15px]">{item[0]}</h1>
-                  </div>
-                ); 
-              })} */}
               <h1 className="text-[20px] md:text-[40px] mt-[8px] md:mt-[15px]">{truncateString(name, 10)} . . .</h1>
             </div>
               

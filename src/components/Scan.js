@@ -20,7 +20,7 @@ const Scan = () => {
             onResult={(result, error) => {
               if (!!result) {
                 setData(result?.text);
-                if(result?.text=="PT KTP FIK Unklab Ritkola-Utsa"){
+                if(result?.text === "PT KTP FIK Unklab Ritkola-Utsa"){
                   navigate(`/regis-done/${auth.currentUser.uid}`);
                   update(r(db, `users/${auth.currentUser.uid}`), {
                     i_absensi: "hadir",
