@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import Bgimg from "../assets/images/img-bg2.png";
 import Logo from "../assets/Logo/Logo.png";
 
+import { UserAuth } from "../context/AuthContext";
+
 const ForgetPass = () => {
+  const { resetPass } = UserAuth();
+
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await resetPass(email);
+      alert("Silahkan cek email anda, di kotak masuk atau spam");
+    } catch (error) {
+      console.log(error);
+      setError("Email tidak valid");
+    }
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 h-screen w-full">
@@ -12,21 +31,23 @@ const ForgetPass = () => {
           <img className="w-full h-full object-cover" src={Bgimg} alt="" />
         </div>
 
-        <div className="bg-[#ffffff] flex flex-col justify-center">
+        <div className="flex flex-col justify-center">
           <div>
             <img className="md:ml-[150px] mx-auto" src={Logo} alt="" />
           </div>
-          <form className="max-w-[360px] md:max-w-[400px] w-full mx-auto bg-[#F6F6F6] p-8 px-8 rounded-lg shadow-xl">
+          {error ? <p className="my-5 text-sm text-red-600">{error}</p> : null}
+          <form onSubmit={handleSubmit} className="max-w-[360px] md:max-w-[400px] w-full mx-auto bg-[#F6F6F6] p-8 px-8 rounded-lg shadow-xl">
             <h2 className="text-3xl text-black font-medium text-center">Reset Password</h2>
             <div className="flex flex-col py-2">
               <label className="after:content-['*'] after:text-red-500 after:ml-0.5">Email</label>
-              <input className="rounded-lg mt-2 p-2 border border-black text-black invalid:text-red-500 peer" type="email" placeholder="Tulis email anda..." />
+              <input onChange={(e) => setEmail(e.target.value)} className="rounded-lg mt-2 p-2 border border-black text-black invalid:text-red-500 peer" type="email" placeholder="Tulis email anda..." />
               <p className="text-sm text-red-500 invisible peer-invalid:visible">Email tidak valid</p>
             </div>
             <p className="text-gray-300 before:content-['*'] before:text-red-500">Tulis email yang anda daftarkan</p>
-            <div className="flex justify-between pt-[16px]">
-              <Link to="/regis">
-                <button className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-1xl font-bold rounded-lg shadow-2xl shadow-gray-300 w-[295px] md:w-[337px] h-[50px] ">Kirim Reset Password</button>
+            <div className="pt-[16px]">
+              <button className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-1xl font-bold rounded-lg shadow-2xl shadow-gray-300 w-[295px] md:w-[337px] h-[50px] mb-4">Kirim Reset Password</button>
+              <Link to="/">
+                <button className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-1xl font-bold rounded-lg shadow-2xl shadow-gray-300 w-[295px] md:w-[337px] h-[50px] ">Masuk</button>
               </Link>
             </div>
           </form>

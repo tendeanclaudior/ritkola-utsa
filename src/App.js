@@ -11,6 +11,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { ProtectedRoute } from './components/ProtectedRoute'
 
 function App() {
+  
   return (
     <>
       <AuthContextProvider>
@@ -41,7 +42,7 @@ function App() {
               <Scan />
             </ProtectedRoute> 
           } />
-          <Route path="/forgetpas" element={<ForgetPass />} />
+          <Route path="/forgetpass" element={<ForgetPass />} />
         </Routes>
       </AuthContextProvider>
     </>

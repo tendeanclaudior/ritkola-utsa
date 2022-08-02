@@ -5,6 +5,7 @@ import Bgimg from "../assets/images/img-bg2.png";
 import Logo from "../assets/Logo/Logo.png";
 
 import { UserAuth } from "../context/AuthContext";
+import UseTimeout from "../components/UseTimeout";
 
 const List = () => {
   const { signUp } = UserAuth();
@@ -12,6 +13,10 @@ const List = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const { logOut } = UserAuth();
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

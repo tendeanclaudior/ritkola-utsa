@@ -6,12 +6,20 @@ import Logo from "../assets/Logo/Logo.png";
 
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import UseTimeout from "../components/UseTimeout";
+
 const Login = () => {
+  const { logOut } = UserAuth();
+
+    UseTimeout(() => 
+    logOut(), 0)
+    
   const { logIn } = UserAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +28,7 @@ const Login = () => {
       navigate("/regis2")
     } catch (error) {
       console.log(error);
+      setError("Password salah")
     }
   };
 
@@ -45,7 +54,8 @@ const Login = () => {
               <label className="after:content-['*'] after:text-red-500 after:ml-0.5">Password</label>
               <input onChange={(e) => setPassword(e.target.value)} className="rounded-lg mt-2 p-2 border border-black" type="password" placeholder="Tulis password anda..." />
             </div>
-            <Link to="/forgetpas">
+            {error ? <p className="mt-[1px] mb-5 text-sm text-red-600">{error}</p> : null}
+            <Link to="/forgetpass">
               <p className="text-gray-500 underline">Forget Password</p>
             </Link>
             <div className="flex justify-between pt-[16px]">
