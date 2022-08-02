@@ -8,7 +8,7 @@ import { db, storage, auth } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { ref as r, set, getDatabase, child, get } from "firebase/database";
 
-
+import {useNavigate} from 'react-router-dom'
 
 
 
@@ -26,6 +26,8 @@ const Registration = () => {
   const [upImage, setUpImage] = useState([]);
   const [error, setError] = useState(false)
   const [baseImage, setBaseImage] = useState("");
+
+  const navigate = useNavigate();
 
   const snaphsot = useRef(null);
   const errors = useRef(null);
@@ -53,20 +55,44 @@ const Registration = () => {
 
   const onSubmit = (e) => {
 
+    let a = 0;
+    console.log("a",a)
     if(name.length === 0){
+      console.log("error sebelum", error)
       setError(true)
-    }if(nowa.length === 0){
+      a=1;
+      console.log("a:",a)
+      console.log("error setelah read nama:", error)
+    } 
+    if(nowa.length === 0){
       setError(true)
-    }if(city.length === 0){
+      a=1;
+    } 
+    if(city.length === 0){
       setError(true)
-    }if(sosmed.length === 0){
+      a=1;
+    } 
+    if(sosmed.length === 0){
       setError(true)
-    }if(info.length === 0){
+      a=1;
+    } 
+    if(info.length === 0){
       setError(true)
-    }if(reason.length === 0){
+      a=1;
+    } 
+    if(reason.length === 0){
       setError(true)
-    }if(value.length === 0){
+      a=1;
+    } 
+    if(value.length === 0){
       setError(true)
+      a=1;
+    } 
+
+    if(a===0){  
+      navigate("/regis2");
+      console.log("berhasil pindah ke next page")
+    }
 
       const getValues = async () => {
         try {
@@ -80,7 +106,6 @@ const Registration = () => {
           error.current = getError.message;
         }
       }
-    }
 
       e.preventDefault()
       set(r(db, `users/${auth.currentUser.uid}`), {
@@ -95,24 +120,23 @@ const Registration = () => {
         i_absensi: "Tidak hadir",
         j_foto: baseImage,
       });
-      setError(true)
 
-    // navigate("/regis2");
-    if (image == null) return;
+
+
+        if (image == null) return;
     const imageRef = ref(storage, `images/${auth.currentUser.uid}`);
     uploadBytes(imageRef, image).then((snaphsot) => {
       getDownloadURL(snaphsot.ref).then((url) => {
         setUpImage((prev) => [...prev, url]);
       });
     });
-
   }  
 
 
   return (
     <div className="w-full">
       <div>
-        <img className="w-full h-[1500px] md:h-[1500px] object-cover mix-blend-overlay absolute" src={imgbg2} alt="/" />
+        <img className="w-full h-[1500px] md:h-[2000px] object-cover mix-blend-overlay absolute" src={imgbg2} alt="/" />
       </div>
 
       <div className="flex relative justify-center px-2 pt-10 sm:pt-20 text-black">

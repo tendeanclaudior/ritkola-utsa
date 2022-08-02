@@ -10,8 +10,8 @@ import UseTimeout from './UseTimeout'
 const Registration2 = () => {
     const { logOut } = UserAuth();
 
-    UseTimeout(() => 
-    logOut(), 1200000)
+    // UseTimeout(() => 
+    // logOut(), 1200000)
 
   return (
     <div>

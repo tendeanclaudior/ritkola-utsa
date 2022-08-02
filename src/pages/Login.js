@@ -8,6 +8,7 @@ import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import UseTimeout from "../components/UseTimeout";
 
+
 import { getDatabase, ref, child, get } from "firebase/database";
 import { auth } from "../firebase";
 
@@ -16,15 +17,15 @@ const Login = () => {
   const { logIn} = UserAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {cek, setCek} = useState(true);
-  console.log("before",cek)
+  const [cek, setCek] = useState(true);
+  console.log(cek)
   const navigate = useNavigate();
   const [errors, setErrors] = useState("")
   
   const { logOut } = UserAuth();
 
-    UseTimeout(() => 
-    logOut(), 0)
+    // UseTimeout(() => 
+    // logOut(), 0)
     
   const snaphsot = useRef(null);
   const error = useRef(null);
