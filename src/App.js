@@ -8,7 +8,7 @@ import RegisDone from "./components/RegisDone";
 import Scan from "./components/Scan";
 import ForgetPass from "./pages/ForgetPassword";
 import { AuthContextProvider } from "./context/AuthContext";
-import { ProtectedRoute } from './components/ProtectedRoute'
+import {ProtectedRoute} from './components/ProtectedRoute';
 
 function App() {
   

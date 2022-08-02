@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import imgbg2 from "../assets/images/img-bg2.png";
 import ErrorMsg from "./ErrorMsg";
 import Sponsor from "./Sponsor";
-// import { useNavigate } from "react-router-dom";
 import UploadPhoto from "./UploadPhoto";
 import Input from "./Input";
 import { db, storage, auth } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { ref as r, set } from "firebase/database";
-import { Navigate } from "react-router-dom";
-import { base64 } from "@firebase/util";
+import { ref as r, set, getDatabase, child, get } from "firebase/database";
+
+
+
+
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -23,10 +24,11 @@ const Registration = () => {
 
   const [image, setImage] = useState("");
   const [upImage, setUpImage] = useState([]);
-  const [imagePreview, setImagePreview] = useState(null);
   const [error, setError] = useState(false)
   const [baseImage, setBaseImage] = useState("");
-  // const navigate = useNavigate();
+
+  const snaphsot = useRef(null);
+  const errors = useRef(null);
 
   const uploadImage = async (e) => {
     const file = e.target.files[0]
@@ -65,6 +67,19 @@ const Registration = () => {
       setError(true)
     }if(value.length === 0){
       setError(true)
+
+      const getValues = async () => {
+        try {
+          const database = getDatabase();
+          const rootReference = r(database);
+          const dbGet = await get(child(rootReference, `users/${auth.currentUser.uid}`));
+          const dbValue = dbGet.val();
+          console.log("test", dbValue);
+          snaphsot.current = dbValue;
+        } catch (getError) {
+          error.current = getError.message;
+        }
+      }
     }
 
       e.preventDefault()
@@ -92,6 +107,8 @@ const Registration = () => {
     });
 
   }  
+
+
   return (
     <div className="w-full">
       <div>
