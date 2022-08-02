@@ -1,7 +1,5 @@
 import React from "react";
 
-// import imgprofile from "../assets/images/Logo-Unklab.png";
-
 const UploadPhoto = ({ img, ...rest }) => {
   return (
     <div className="p-2">

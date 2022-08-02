@@ -1,27 +1,72 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Bgimg from "../assets/images/img-bg2.png";
 import Logo from "../assets/Logo/Logo.png";
 
 import { UserAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-const Login = () => {
-  const { logIn } = UserAuth();
+import { useNavigate} from "react-router-dom";
 
+import { getDatabase, ref, child, get } from "firebase/database";
+import { auth } from "../firebase";
+
+
+const Login = () => {
+  const { logIn} = UserAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {cek, setCek} = useState(true);
+  console.log("before",cek)
   const navigate = useNavigate();
+  const snaphsot = useRef(null);
+  const error = useRef(null);
+
+  
+
+    //test
+    const getValues = async () => {
+      try {
+        const database = getDatabase();
+        const rootReference = ref(database);
+        const dbGet = await get(child(rootReference, "users"));
+        const dbValue = dbGet.val();
+        console.log("test", dbValue);
+        snaphsot.current = dbValue;
+      } catch (getError) {
+        error.current = getError.message;
+      }
+
+    };
+    
+    useEffect(() => {
+      getValues();
+    }, []);
+  
+    const users = snaphsot.current;
+    
+    // const data = Object.values(users);
+
+    if(users==""){
+      setCek(false)
+    }
+    console.log("after",cek)
+  
+    // if(!cek) {
+    //   navigate("/regis")
+    // }
+    // sampe sini
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await logIn(email, password);
-      navigate("/regis2")
+      navigate("/regis2") //ini yang mo rubah
     } catch (error) {
       console.log(error);
     }
   };
+
 
   return (
     <>

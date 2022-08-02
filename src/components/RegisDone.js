@@ -4,7 +4,7 @@ import background from "../assets/images/img-bg2.png";
 import kupon from "../assets/images/kupon.png";
 import idcard from "../assets/images/idcard.png";
 import Sponsor from "./Sponsor";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { getDatabase, ref, child, get } from "firebase/database";
 import { auth } from "../firebase";
 
@@ -13,7 +13,7 @@ const RegisDone = () => {
   const [isLoading, setIsLoading] = useState(true);
   const snaphsot = useRef(null);
   const error = useRef(null);
-
+  
   const getValues = async () => {
     try {
       const database = getDatabase();
@@ -45,6 +45,10 @@ const RegisDone = () => {
   const data = Object.values(users);
   const name = data[0];
   const imgProfile = data[9];
+
+
+
+
   console.log({ users, data });
 
   const truncateString = (str, num) => {
@@ -55,6 +59,8 @@ const RegisDone = () => {
     }
   };
   console.log(data[0])
+
+
 
   return (
     <div>
