@@ -4,14 +4,8 @@ import ceklist from '../assets/images/ceklist.png'
 import Sponsor from './Sponsor'
 import qrcode from '../assets/images/qrcode.png'
 import { Link } from 'react-router-dom'
-import { UserAuth } from '../context/AuthContext'
-import UseTimeout from './UseTimeout'
 
 const Registration2 = () => {
-    const { logOut } = UserAuth();
-
-    // UseTimeout(() => 
-    // logOut(), 1200000)
 
   return (
     <div>

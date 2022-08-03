@@ -1,33 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { UserAuth } from "../context/AuthContext";
 import Bgimg from "../assets/images/img-bg2.png";
 import Logo from "../assets/Logo/Logo.png";
 
-import { UserAuth } from "../context/AuthContext";
-import UseTimeout from "../components/UseTimeout";
 
 const List = () => {
   const { signUp } = UserAuth();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const { logOut } = UserAuth();
-
-  
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     try { 
-      await signUp(email, password);
+      signUp(email, password);
       navigate("/regis");
     } catch (error) {
       navigate('/list')
-      console.log("error password:",error);
-      alert("Password minimal 6 karakter")
-
+      alert("Email telah digunakan")
     }
   };
 
