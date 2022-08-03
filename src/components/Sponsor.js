@@ -11,16 +11,14 @@ import LogoChip from "../assets/Logo/Logo-Chip.png";
 import LogoShoes from "../assets/Logo/Logo-Shoes.png";
 import LogoOlk from "../assets/Logo/Logo-Olk.png";
 import LogoP from "../assets/Logo/Logo-P.png";
-import LogoKis from "../assets/Logo/Logo-Kis.png";
-import LogoAbon from "../assets/Logo/Logo-Abon.png";
-
-import LogoInblood from "../assets/Logo/Logo-inblod.png";
-import LogoBengkel from "../assets/Logo/Logo-Bengkel.png";
-import LogoReid from "../assets/Logo/Logo-Reid.png";
-import LogoThe from "../assets/Logo/Logo-The.png";
 import LogoWonder from "../assets/Logo/Logo-Wonder.png";
 import LogoGreat from "../assets/Logo/Logo-Great.png";
 import LogoLikupang from "../assets/Logo/Logo-Likupan.png";
+
+import LogoUMKM from "../assets/Logo/LogoUMKM.png";
+import LogoRumah from "../assets/Logo/LogoRUMAH.png";
+import LogoISS from "../assets/Logo/LogoISS.png";
+import LogoRA from "../assets/Logo/LogoRA.png";
 
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { AtSymbolIcon } from "@heroicons/react/solid";
@@ -65,26 +63,17 @@ function Sponsor() {
                 <img src={LogoP} alt="logo" className="w-[40px] mr-2" />
               </div>
               <div>
-                <img src={LogoKis} alt="logo" className="mr-2" />
-              </div>
-              <div>
-                <img src={LogoAbon} alt="logo" />
+                <img src={LogoLikupang} className="w-[55px]" alt="logo" />
               </div>
             </div>
           </div>
           <div>
             <div className="flex justify-center">
               <div>
-                <img src={LogoInblood} alt="logo" className="w-[70px] md:w-[120px]  mr-3" />
+                <img src={LogoUMKM} alt="logo" className="w-[50px] h-[50px] mr-3 ml-2 rounded-full" />
               </div>
               <div>
-                <img src={LogoBengkel} alt="logo" className="w-[70px] md:w-[120px] ml-1 mr-3" />
-              </div>
-              <div>
-                <img src={LogoReid} alt="logo" className="w-[50px] md:w-[80px] ml-2 mr-3" />
-              </div>
-              <div>
-                <img src={LogoThe} alt="logo" className="w-[60px] md:w-[85px] ml-2 mr-3" />
+                <img src={LogoISS} alt="logo" className="w-[55px] h-[55px] ml-2 mr-3 rounded-full" />
               </div>
               <div>
                 <img src={LogoWonder} alt="logo" className="w-[85px] md:w-[120px] ml-2 mr-3" />
@@ -93,7 +82,10 @@ function Sponsor() {
                 <img src={LogoGreat} alt="logo" className="w-[30px] md:w-[40px] mr-3" />
               </div>
               <div>
-                <img src={LogoLikupang} alt="logo" className="w-[50px] md:w-[60px]" />
+                <img src={LogoRA} alt="logo" className="w-[55px] h-[55px] rounded-full ml-2 mr-3" />
+              </div>
+              <div>
+                <img src={LogoRumah} alt="logo" className="w-[50px] h-[50px] ml-3 mr-3 rounded-full" />
               </div>
             </div>
           </div>
