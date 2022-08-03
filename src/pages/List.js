@@ -3,22 +3,28 @@ import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import Bgimg from "../assets/images/img-bg2.png";
 import Logo from "../assets/Logo/Logo.png";
-
+import { ref as r, update } from "firebase/database";
+import { db, auth } from "../firebase";
 
 const List = () => {
   const { signUp } = UserAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { logOut } = UserAuth();
 
   const handleSubmit = () => {
+    logOut()
     try { 
       signUp(email, password);
-      navigate("/regis");
+      navigate('/regis');
     } catch (error) {
       navigate('/list')
       alert("Email telah digunakan")
     }
+    update(r(db, `users/${auth.currentUser.uid}`), {
+      k_complete: false,
+    });
   };
 
   return (

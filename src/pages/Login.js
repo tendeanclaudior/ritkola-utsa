@@ -1,81 +1,26 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 import Bgimg from "../assets/images/img-bg2.png";
 import Logo from "../assets/Logo/Logo.png";
-
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import UseTimeout from "../components/UseTimeout";
-
-
-import { getDatabase, ref, child, get } from "firebase/database";
-import { auth } from "../firebase";
-
 
 const Login = () => {
-  const { logIn} = UserAuth();
+  const { logIn } = UserAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [cek, setCek] = useState(true);
-  console.log(cek)
   const navigate = useNavigate();
-  const [errors, setErrors] = useState("")
-  
-  const { logOut } = UserAuth();
-
-    // UseTimeout(() => 
-    // logOut(), 0)
-    
-  const snaphsot = useRef(null);
-  const error = useRef(null);
-
-  
-
-    //test
-    const getValues = async () => {
-      try {
-        const database = getDatabase();
-        const rootReference = ref(database);
-        const dbGet = await get(child(rootReference, "users"));
-        const dbValue = dbGet.val();
-        console.log("test", dbValue);
-        snaphsot.current = dbValue;
-      } catch (getError) {
-        error.current = getError.message;
-      }
-
-    };
-    
-    useEffect(() => {
-      getValues();
-    }, []);
-  
-    const users = snaphsot.current;
-    
-    // const data = Object.values(users);
-
-    if(users==""){
-      setCek(false)
-    }
-    console.log("after",cek)
-  
-    // if(!cek) {
-    //   navigate("/regis")
-    // }
-    // sampe sini
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await logIn(email, password);
-      navigate("/regis2") //ini yang mo rubah
+      navigate("/regis")
     } catch (error) {
       console.log(error);
-      setErrors("Password salah")
+      alert('Password anda salah')
     }
   };
-
 
   return (
     <>
@@ -99,7 +44,6 @@ const Login = () => {
               <label className="after:content-['*'] after:text-red-500 after:ml-0.5">Password</label>
               <input onChange={(e) => setPassword(e.target.value)} className="rounded-lg mt-2 p-2 border border-black" type="password" placeholder="Tulis password anda..." />
             </div>
-            {errors ? <p className="mt-[1px] mb-5 text-sm text-red-600">{errors}</p> : null}
             <Link to="/forgetpass">
               <p className="text-gray-500 underline">Forget Password</p>
             </Link>

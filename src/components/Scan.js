@@ -27,7 +27,6 @@ const Scan = () => {
                   });
                 }
               }
-
               if (!!error) {
                 console.info(error);
               }

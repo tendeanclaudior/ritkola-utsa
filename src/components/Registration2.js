@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { db, auth } from "../firebase";
+import { ref as r, update } from "firebase/database";
 import backgrond from '../assets/images/img-bg2.png'
 import ceklist from '../assets/images/ceklist.png'
 import Sponsor from './Sponsor'
 import qrcode from '../assets/images/qrcode.png'
 import { Link } from 'react-router-dom'
+import { UserAuth } from '../context/AuthContext';
 
 const Registration2 = () => {
 
+    const {logOut} = UserAuth();
+
+    useEffect(() => {
+        update(r(db, `users/${auth.currentUser.uid}`), {
+            k_complete: true,
+        });
+    }, []);
+
+    const keluar = () => {
+        logOut()
+    }
+
   return (
+    <>
     <div>
         <div className='flex'>
             <div>
@@ -26,7 +42,8 @@ const Registration2 = () => {
                     <p>ekosistem ekonomi kreatif</p>
                     <p>MINAHASA  UTARA</p>
                 </div>
-                <div className='mt-[70px] md:mt-[178px] flex justify-end mr-[30px] md:mr-[70px]'>
+                <div className='mt-[70px] md:mt-[178px] flex justify-between mr-[30px] md:mr-[70px]'>
+                <button className='pl-[20px]' onClick={keluar}><p className='bg-red-700 py-1 px-2 rounded-lg text-white'>Logout</p></button>
                 <Link to="/Scan">
                     <img src={qrcode} alt="QR Code" className='w-[40px] h-[40px] md:w-[123px] md:h-[123px]' />
                 </Link>
@@ -37,6 +54,7 @@ const Registration2 = () => {
             <Sponsor />
         </div>
     </div>
+    </>
   )
 }
 

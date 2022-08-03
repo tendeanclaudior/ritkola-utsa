@@ -6,11 +6,8 @@ import UploadPhoto from "./UploadPhoto";
 import Input from "./Input";
 import { db, storage, auth } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { ref as r, set, getDatabase, child, get } from "firebase/database";
-
+import { ref as r, getDatabase, child, get, update } from "firebase/database";
 import {useNavigate} from 'react-router-dom'
-
-
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -21,17 +18,12 @@ const Registration = () => {
   const [reason, setReason] = useState("");
   const [value, setValue] = useState("");
   const [why, setWhy] = useState("");
-
   const [image, setImage] = useState("");
   const [upImage, setUpImage] = useState([]);
   const [error, setError] = useState(false)
   const [baseImage, setBaseImage] = useState("");
-
   const navigate = useNavigate();
-
-  const snaphsot = useRef(null);
-  const errors = useRef(null);
-
+  
   const uploadImage = async (e) => {
     const file = e.target.files[0]
     const base64 = await convertBase64(file);
@@ -53,62 +45,71 @@ const Registration = () => {
     })
   }
 
-  const onSubmit = (e) => {
 
+  const errors = useRef(null)
+  const cek = async () => {
+    try {
+      const database = getDatabase();
+      const rootReference = r(database);
+      const dbGet = await get(child(rootReference, `users/${auth.currentUser.uid}/k_complete`));
+      const dbValue = dbGet.val();
+      console.log("test", dbValue);
+      if(dbValue){
+        navigate('/regis2')
+      }
+    } catch (getError) {
+      errors.current = getError.message;
+    }
+  }
+ 
+  useEffect(() => {
+    cek();
+  }, []);
+
+  const onSubmit = (e) => {
+    let status = true;
     let a = 0;
-    console.log("a",a)
     if(name.length === 0){
-      console.log("error sebelum", error)
       setError(true)
       a=1;
-      console.log("a:",a)
-      console.log("error setelah read nama:", error)
+      status = false
     } 
     if(nowa.length === 0){
       setError(true)
       a=1;
+      status = false
     } 
     if(city.length === 0){
       setError(true)
       a=1;
+      status = false
     } 
     if(sosmed.length === 0){
       setError(true)
       a=1;
+      status = false
     } 
     if(info.length === 0){
       setError(true)
       a=1;
+      status = false
     } 
     if(reason.length === 0){
       setError(true)
       a=1;
+      status = false
     } 
     if(value.length === 0){
       setError(true)
       a=1;
+      status = false
     } 
 
-    if(a===0){  
-      navigate("/regis2");
-      console.log("berhasil pindah ke next page")
-    }
-
-      const getValues = async () => {
-        try {
-          const database = getDatabase();
-          const rootReference = r(database);
-          const dbGet = await get(child(rootReference, `users/${auth.currentUser.uid}`));
-          const dbValue = dbGet.val();
-          console.log("test", dbValue);
-          snaphsot.current = dbValue;
-        } catch (getError) {
-          error.current = getError.message;
-        }
-      }
-
+    if(a === 0){  
+      status = true;
+      console.log("setelah", status)
       e.preventDefault()
-      set(r(db, `users/${auth.currentUser.uid}`), {
+      update(r(db, `users/${auth.currentUser.uid}`), {
         a_nama: name,
         b_nomor_WA: nowa,
         c_medsos: sosmed,
@@ -119,11 +120,12 @@ const Registration = () => {
         h_penjelasan: why,
         i_absensi: "Tidak hadir",
         j_foto: baseImage,
+        k_complete: "true",
       });
+      navigate("/regis2");
+    }
 
-
-
-        if (image == null) return;
+    if (image == null) return;
     const imageRef = ref(storage, `images/${auth.currentUser.uid}`);
     uploadBytes(imageRef, image).then((snaphsot) => {
       getDownloadURL(snaphsot.ref).then((url) => {
@@ -131,7 +133,6 @@ const Registration = () => {
       });
     });
   }  
-
 
   return (
     <div className="w-full">
@@ -242,13 +243,11 @@ const Registration = () => {
           </div>
         </div>
       </div>
-
       <div className="flex relative justify-center px-2 pt-10 pb-[100px] sm:pt-20 text-black">
         <button onClick={onSubmit} className="bg-gradient-to-b from-[#165E00] via-[#FFDD00] to-[#FF0000] text-white text-3xl font-bold rounded-full shadow-2xl shadow-gray-300 w-[137px] h-[60px] md:w-[137px] ">
           Next
         </button>
       </div>
-
       <Sponsor />
     </div>
   );
