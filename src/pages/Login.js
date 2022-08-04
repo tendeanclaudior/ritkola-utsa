@@ -15,7 +15,11 @@ const Login = () => {
     e.preventDefault();
     try {
       await logIn(email, password);
-      navigate("/regis")
+      if(email==="admin@gmail.com"){
+        navigate("/superadminX")
+      } else {
+        navigate("/regis")
+      }
     } catch (error) {
       console.log(error);
       alert('Password anda salah')

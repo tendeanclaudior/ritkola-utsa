@@ -9,6 +9,7 @@ import Scan from "./components/Scan";
 import ForgetPass from "./pages/ForgetPassword";
 import { AuthContextProvider } from "./context/AuthContext";
 import {ProtectedRoute} from './components/ProtectedRoute';
+import Admin from "./pages/Admin";
 
 function App() {
   
@@ -43,6 +44,12 @@ function App() {
             </ProtectedRoute> 
           } />
           <Route path="/forgetpass" element={<ForgetPass />} />
+          <Route path="/superadminX" 
+            element={
+            <ProtectedRoute>
+              <Admin />
+            </ProtectedRoute> 
+          } />
         </Routes>
       </AuthContextProvider>
     </>
